@@ -228,6 +228,118 @@ def ham_ngoai():
 
 ham_ngoai()
 
+# Từ khoá global
+# Muốn chỉnh sửa biến global trong một hàm thì khai báo global tên biến trong hàm
+a = 1 # Biến toàn cục
+
+def them():
+    global a 
+    a = a + 9 
+    print("Trong them():", a)
+
+them()
+print("Trong main:", a)
+
+# Chia sẻ biến toàn cục thông qua module
+import config
+
+config.a = 10
+config.b = "hello"
+
+print(config.a)
+print(config.b)
+
+# Sử dụng biến toàn cục trong hàm lồng nhau
+# x = 20
+# def ham1():
+#     def ham2():
+#         global x
+#         x = 25
+
+# print("Trước khi gọi ham2: ", x)
+# print("Đang gọi ham2")
+# print("Sau khi gọi ham2: ", x)
+
+# ham1()
+# print("x trong main: ", x)
+
+# Module trong python
+
+import module
+
+print(module.them(4,5))
+
+# Sử dụng lệnh import
+import math
+print("Giá trị của pi là: ", math.pi)
+
+# Nhập module và sửa tên khi nhập
+import math as m
+print("Giá trị của pi là: ", m.pi)
+
+# Lệnh from ... import
+from math import pi
+print("Giá trị của pi là: ", pi)
+
+# Nhập tất cả các tên
+# from math import *
+# print("Giá trị của pi là: ", pi)
+
+# Đường dẫn tìm kiếm module 
+# Khi nhập module, Python sẽ tìm một vài nơi. Trình thông dịch tìm các module có sẵn, 
+# nếu không thấy nó sẽ vào danh sách các thư mục được định nghĩa trong sys.path. 
+# Thứ tự tìm kiếm sẽ là:
+# Thư mục hiện tại.
+# PYTHONPATH (một biến môi trường với danh sách thư mục).
+# Thư mục mặc định có vị trí phụ thuộc vào chọn lựa trong quá trình cài đặt.
+import sys
+sys.path
 
 
+# Nạp lại module
+# Trình thông dịch Python chỉ nhập một module trong một phiên. 
+# Điều này làm cho mọi thứ trở nên hiệu quả hơn.
+# Bạn viết code sau trong file mới, đặt tên là module_1:
 
+# print("Code đã hoạt động") 
+# Giờ ta thử nhập module module_1 để xem sự hiệu quả của việc nhập module nhiều lần.
+
+# >>> import module_1
+# Code đã hoạt động
+# >>> import module_1
+# >>> import module_1
+# >>> import module_1
+# >>> 
+
+# Bạn có thể thấy rằng code trên chỉ thực hiện một lần, nghĩa là module_1 chỉ được nhập 1 lần trong 1 phiên làm việc đó. 
+# Bây giờ nếu bạn sửa đổi code trong module_1 bạn phải nạp lại nó. Để làm điều này bạn phải khởi động lại trình thông dịch, 
+# nhưng cách này có vẻ không ổn lắm.
+
+# Python cung cấp cách thông minh hơn để làm điều này. 
+# Bạn có thể sử dụng hàm reload() trong module imp để nạp lại module_1, như dưới đây:
+
+# >>> import module_1
+# Code đã hoạt động
+# >>> import module_1
+# >>> import module_1
+# >>> import module_1
+# >>> import imp
+# >>> imp.reload(module_1)
+# Code đã hoạt động
+
+
+#Hàm dir()
+# Hàm dir() trong Python được sử dụng để tìm ra các tên được định nghĩa trong 
+# một module. Ví dụ, bạn định nghĩa hàm them() trong ví dụ ban đầu.
+import module
+print(dir(module))
+print(module.__name__)
+
+# Package
+# Khi chương trình đang code ngày càng lớn với rất nhiều module, chúng ta sẽ đặt những module giống nhau vào một package, 
+# và những nhóm module khác vào package khác. Điều này giúp dễ dàng quản lý chương trình hơn và nó cũng dễ hiểu hơn.
+
+# Nếu như thư mục có thể chứa các thư mục con thì package cũng vậy, trong một package có thể có package con và các module khác.
+
+# Một thư mục phải chứa file có tên __init__.py để Python hiểu thư mục này là một package. File này có thể để trống, 
+# nhưng thông thường các lập trình viên thường đặt code khởi tạo cho package ở đây.
